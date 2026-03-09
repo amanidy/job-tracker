@@ -12,3 +12,12 @@ function toggleApplicationForm(){
 addBtnEl.addEventListener('click',
   toggleApplicationForm
 )
+
+//Setting date to default
+const today = new Date();
+  
+const day = ("0" + today.getDate()).slice(-2);
+const month = ("0" + (today.getMonth() + 1)).slice(-2);
+const formattedDate = today.getFullYear() + "-" + month + "-" + day;
+
+  document.getElementById("date").value = formattedDate;
