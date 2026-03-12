@@ -1,3 +1,5 @@
+
+
 //capturing values
 const formEl = document.querySelector("form");
 const addBtnEl = document.querySelector('.add-job');
@@ -21,3 +23,22 @@ const month = ("0" + (today.getMonth() + 1)).slice(-2);
 const formattedDate = today.getFullYear() + "-" + month + "-" + day;
 
   document.getElementById("date").value = formattedDate;
+  
+  
+  //localStorage read/write
+  const key = "applications";
+  const applicationsArr= JSON.parse(localStorage.getItem(key)) || [];
+  
+  function loadData(){
+    const applicationsArr = JSON.parse(localStorage.getItem(key)) || [];
+    return applicationsArr;
+  }
+  
+  function saveData(applicationsArr){
+    localStorage.setItem(key,JSON.stringify(applicationsArr));
+    
+  }
+  
+  saveData(['KRA']);
+  
+  console.log(loadData());
