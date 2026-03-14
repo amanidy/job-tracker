@@ -34,11 +34,61 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     return applicationsArr;
   }
   
-  function saveData(applicationsArr){
+  function saveData(){
     localStorage.setItem(key,JSON.stringify(applicationsArr));
     
   }
   
-  saveData(['KRA']);
+   //reading all field values
+    const nameEl = document.getElementById('name');
+    const roleEl =document.getElementById('role');
+    const urlEl = document.getElementById('url');
+    const dateEl =document.getElementById('date');
+    const statusEl =document.getElementById('status');
+    
   
-  console.log(loadData());
+  //form submit function 
+  function handleAddSubmit() {
+  
+    /*preventing default form submission*/
+    const formEl = document.getElementById('form');
+    formEl.addEventListener('submit',function (e) {
+      e.preventDefault();
+    })
+    
+   
+    /*validating company's name and role*/
+    
+    if(!nameEl.value || !roleEl.value){
+      alert("Ensure the fields are not empty")
+    }
+    
+    applicationsArr.push({
+      id:Date.now(),
+      name:nameEl.value.trim(),
+      role:roleEl.value.trim(),
+      url:urlEl.value.trim(),
+      date:dateEl.value.trim(),
+      status:statusEl.value.trim()
+    });
+    
+    saveData();
+    clearForm();
+    
+    console.log(applicationsArr);
+    
+  }
+  
+  function clearForm(){
+    nameEl.value = "";
+    roleEl.value = "";
+    urlEl.value = "";
+    dateEl.value = formattedDate;
+    statusEl.value = document.getElementById('applied');
+    
+    
+    
+    
+  }
+  
+  

@@ -45,7 +45,7 @@
         
        <label for="status">Status:</label>
       <select name="status" id="status">Status
-      <option default value="applied">Applied</option>
+      <option id="applied" default value="applied">Applied</option>
       
        <option value="phone">Phone Screen</option>
         <option value="interview">Interview</option>
@@ -56,7 +56,7 @@
       </select>
       </div>
       
-      <button class="submit-btn" type="submit">Submit Application</button>
+      <button onclick="handleAddSubmit()" class="submit-btn" type="submit">Submit Application</button>
       
     </form>
     
