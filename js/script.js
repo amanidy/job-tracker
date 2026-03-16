@@ -73,6 +73,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     });
     
     saveData();
+    renderTable();
     clearForm();
     
     console.log(applicationsArr);
@@ -86,6 +87,63 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     dateEl.value = formattedDate;
     statusEl.value = document.getElementById('applied');
     
+  }
+  
+  /*Rendering the applications table*/
+  
+  function renderTable(){
+    
+    const tableEl = document.querySelector('.table-section');
+    
+    if (!tableEl) {
+      alert('Table container was not found')
+      return;
+      
+    }
+    
+    tableEl.innerHTML = applicationsArr.map(application=> `
+    
+    <div>
+    <table class="application-table">
+    <thead>
+    <tr>
+    <th>Company's Name</th>
+    <th>Role</th>
+    <th>URL</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Action button</th>
+    <th>Action button</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>${application.name}</td>
+    <td>${application.role}</td>
+    <td>${application.url
+    }</td>
+    <td>${application.date}</td>
+    <td>${application.status}</td>
+    <td>
+    <button class="edit-btn"
+      onclick="handleEdit(${application.id})"
+    >
+    Edit 
+    </button>
+    </td>
+    <td>
+    <button class="delete-btn"
+      onclick="handleDelete(${application.id})"
+    >
+    Delete 
+    </button>
+    </td>
+    </tr>
+    
+    </tbody>
+    </table>
+    </div>
+    `).join('')
     
     
     
