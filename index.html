@@ -56,16 +56,28 @@
       </select>
       </div>
       
-      <button onclick="handleAddSubmit()" class="submit-btn" type="submit">Submit Application</button>
+      <button onclick="handleAddSubmit(event)" class="submit-btn" type="submit">Submit Application</button>
       
     </form>
     
   </section>
   
   <section class="table-section">
-    <table border="0">
-      
-    </table>
+    <div>
+    <table class="application-table">
+    <thead>
+    <tr>
+    <th>Company's Name</th>
+    <th>Role</th>
+    <th>URL</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Action button</th>
+    <th>Action button</th>
+    </tr>
+    </thead>
+    <tbody class="table-body"></tbody>
+      </div>
     
   </section>
   

@@ -46,17 +46,17 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     const dateEl =document.getElementById('date');
     const statusEl =document.getElementById('status');
     
-  
-  //form submit function 
-  function handleAddSubmit() {
-  
-    /*preventing default form submission*/
-    const formEl = document.getElementById('form');
-    formEl.addEventListener('submit',function (e) {
-      e.preventDefault();
-    })
+    
+    const formBody = document.getElementById('form');
+    formBody.addEventListener('submit',handleAddSubmit)
     
    
+  
+  //form submit function 
+  function handleAddSubmit(e) {
+  
+  e.preventDefault();
+    
     /*validating company's name and role*/
     
     if(!nameEl.value || !roleEl.value){
@@ -93,30 +93,16 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
   
   function renderTable(){
     
-    const tableEl = document.querySelector('.table-section');
+    const tableBody = document.querySelector('.table-body');
     
-    if (!tableEl) {
-      alert('Table container was not found')
+    if (!tableBody) {
+      alert('Table body was not found')
       return;
       
     }
     
-    tableEl.innerHTML = applicationsArr.map(application=> `
+    tableBody.innerHTML = applicationsArr.map(application=> `
     
-    <div>
-    <table class="application-table">
-    <thead>
-    <tr>
-    <th>Company's Name</th>
-    <th>Role</th>
-    <th>URL</th>
-    <th>Date</th>
-    <th>Status</th>
-    <th>Action button</th>
-    <th>Action button</th>
-    </tr>
-    </thead>
-    <tbody>
     <tr>
     <td>${application.name}</td>
     <td>${application.role}</td>
@@ -140,9 +126,6 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     </td>
     </tr>
     
-    </tbody>
-    </table>
-    </div>
     `).join('')
     
   }
