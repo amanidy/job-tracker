@@ -123,7 +123,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     <td>${application.url
     }</td>
     <td>${application.date}</td>
-    <td>${application.status}</td>
+    <td><span class="status-badge ${getStatusColor(application.status)}">${application.status}</span></td>
     <td>
     <button class="edit-btn"
       onclick="handleEdit(${application.id})"
@@ -145,8 +145,26 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     </div>
     `).join('')
     
-    
-    
+  }
+  
+  
+  //status badge colors
+  
+  function getStatusColor(status){
+    switch (status.toLowerCase()) {
+      case 'applied': return 'status-applied';
+      case 'interview': return 'status-interview';
+      case 'offer': return 'status-offer';
+      case 'rejected': return 'status-rejected';
+      case 'ghosted': return 'status-ghosted';
+      case 'withdrawn': return 'status-withdrawn';
+      case 'phone' : return 'phone';
+      
+      
+      
+      
+      default: return 'status-default';
+    }
   }
   
   

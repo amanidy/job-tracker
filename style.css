@@ -140,6 +140,34 @@ form{
   transform: translateY(-2px);
 }
 
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.status-applied { background-color: #dbeafe; color: #1e40af; }
+.status-interview { background-color: #fef3c7; color: #92400e; }
+.status-rejected { background-color: #fee2e2; color: #991b1b; }
+.status-offer { background-color: #d1fae5; color: #065f46; } 
+.status-ghosted {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-withdrawn {
+  background-color: #e2e3e5; 
+  color: #383d41;            
+}
+
+.status-phone {
+  background-color: #d1ecf1;
+  color: #0c5460;           
+}
+
+
+
 @media (min-width: 768px) {
 
   body {
