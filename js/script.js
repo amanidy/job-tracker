@@ -103,28 +103,25 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     
     tableBody.innerHTML = applicationsArr.map(application=> `
     
-    <tr>
-    <td>${application.name}</td>
-    <td>${application.role}</td>
-    <td>${application.url
-    }</td>
-    <td>${application.date}</td>
-    <td><span class="status-badge ${getStatusColor(application.status)}">${application.status}</span></td>
-    <td>
-    <button class="edit-btn"
-      onclick="handleEdit(${application.id})"
-    >
-    Edit 
+   <tr>
+  <td data-label="Name">${application.name}</td>
+  <td data-label="Role">${application.role}</td>
+  <td data-label="URL">${application.url}</td>
+  <td data-label="Date">${application.date}</td>
+  <td data-label="Status">
+    <span class="status-badge ${getStatusColor(application.status)}">
+      ${application.status}
+    </span>
+  </td>
+  <td data-label="Actions">
+    <button class="edit-btn" onclick="handleEdit(${application.id})">
+      Edit
     </button>
-    </td>
-    <td>
-    <button class="delete-btn"
-      onclick="handleDelete(${application.id})"
-    >
-    Delete 
+     <button class="delete-btn" onclick="handleDelete(${application.id})">
+      Delete
     </button>
-    </td>
-    </tr>
+  </td>
+</tr>
     
     `).join('')
     
@@ -149,5 +146,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
       default: return 'status-default';
     }
   }
+  
+  renderTable();
   
   

@@ -62,7 +62,6 @@ form{
   transform: scale(0.98);
 }
 
-
 .form-section {
   padding: 20px 16px;
   background: #f5f7fb;
@@ -167,7 +166,6 @@ form{
 }
 
 table {
-  width: 100%;
   border-collapse: collapse;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
@@ -206,6 +204,56 @@ tr:hover {
   transform: scale(1.01);
 }
 
+   /* Mobile responsive table */
+@media (max-width: 600px) {
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  
+  thead {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  
+  tr {
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+  }
+
+  
+  td {
+    position: relative;
+    padding: 10px 10px 10px 50%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  
+}
+
 @media (min-width: 768px) {
 
   body {
@@ -239,6 +287,9 @@ tr:hover {
     margin: 0 auto;
     padding: 28px;
   }
+  
+  
+  
 
   .form-title {
     font-size: 22px;
