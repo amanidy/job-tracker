@@ -166,6 +166,32 @@ form{
   color: #0c5460;           
 }
 
+table{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,th{
+  border: 1px solid #2563eb;
+  padding: 8px;
+}
+
+tr:nth-child(even){
+  background-color:  #6b7280;
+}
+
+tr:hover{
+  transform: translateY(-3px);
+}
+
+th{
+  padding-bottom: 12px;
+  padding-top: 12px;
+  text-align: left;
+  color: white;
+  background-color:#10b981;
+}
 
 
 @media (min-width: 768px) {
