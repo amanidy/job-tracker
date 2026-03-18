@@ -34,8 +34,8 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     return applicationsArr;
   }
   
-  function saveData(){
-    localStorage.setItem(key,JSON.stringify(applicationsArr));
+  function saveData(data){
+    localStorage.setItem(key,JSON.stringify(data));
     
   }
   
@@ -85,7 +85,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     roleEl.value = "";
     urlEl.value = "";
     dateEl.value = formattedDate;
-    statusEl.value = document.getElementById('applied');
+    statusEl.value = "Applied";
     
   }
   
@@ -112,6 +112,26 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     <span class="status-badge ${getStatusColor(application.status)}">
       ${application.status}
     </span>
+
+
+    <select onchange="handleStatusChange('${application.id}',this.value,this)">
+    <option value="Applied" ${application.status==='Applied'?'selected':''}>Applied</option>
+    
+    <option value="Phone" ${application.status==='Phone'?'selected':''}>Phone Screen</option>
+    
+    <option value="Interview" ${application.status==='Interview'?'selected':''}>Interview</option>
+    
+    <option value="Offer" ${application.status==='Offer'?'selected':''}>Offer</option>
+    
+    <option value="Rejected" ${application.status==='Rejected'?'selected':''}>Rejected</option>
+    
+    <option value="Ghosted" ${application.status==='Ghosted'?'selected':''}>Ghosted</option>
+    
+    <option value="Withdrawn" ${application.status==='Withdrawn'?'selected':''}>Withdrawn</option>
+    
+    
+    </select>
+    
   </td>
   <td data-label="Actions">
     <button class="edit-btn" onclick="handleEdit(${application.id})">
@@ -127,6 +147,29 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     
   }
   
+  function handleStatusChange(id,value,selectEl){
+    
+    
+    
+    const application = applicationsArr.find(app=> app.id == id);
+    
+    if(application){
+      application.status = value;
+      saveData(applicationsArr);
+    }
+    
+    const row = selectEl.closest('tr');
+  const badge = row.querySelector('.status-badge');
+
+  badge.textContent = value;
+
+  
+  badge.className = `status-badge ${getStatusColor(value)}`;
+    
+    
+    
+  }
+  
   
   //status badge colors
   
@@ -138,7 +181,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
       case 'rejected': return 'status-rejected';
       case 'ghosted': return 'status-ghosted';
       case 'withdrawn': return 'status-withdrawn';
-      case 'phone' : return 'phone';
+      case 'phone' : return 'status-phone';
       
       
       
