@@ -134,9 +134,6 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     
   </td>
   <td data-label="Actions">
-    <button class="edit-btn" onclick="handleEdit(${application.id})">
-      Edit
-    </button>
      <button class="delete-btn" onclick="handleDelete(${application.id})">
       Delete
     </button>
@@ -189,6 +186,24 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
       default: return 'status-default';
     }
   }
+  
+  //Delete application function 
+  function handleDelete(id) {
+    
+    let userResponse = confirm("Delete this application?")
+
+if(userResponse){
+  const updated = applicationsArr.filter(item => item.id !== id);
+  
+  saveData(updated);
+  renderTable();
+  
+  location.reload();
+}else{
+  alert("Action has been cancelled.")
+}
+  
+}
   
   renderTable();
   
