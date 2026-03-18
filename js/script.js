@@ -1,7 +1,7 @@
 
 
 //capturing values
-const formEl = document.querySelector("form");
+const formEl = document.querySelector(".form-section");
 const addBtnEl = document.querySelector('.add-job');
 
 
@@ -27,12 +27,9 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
   
   //localStorage read/write
   const key = "applications";
-  const applicationsArr= JSON.parse(localStorage.getItem(key)) || [];
+  let applicationsArr= JSON.parse(localStorage.getItem(key)) || [];
   
-  function loadData(){
-    const applicationsArr = JSON.parse(localStorage.getItem(key)) || [];
-    return applicationsArr;
-  }
+  
   
   function saveData(data){
     localStorage.setItem(key,JSON.stringify(data));
@@ -72,7 +69,7 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
       status:statusEl.value.trim()
     });
     
-    saveData();
+    saveData(applicationsArr);
     renderTable();
     clearForm();
     
@@ -193,12 +190,11 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
     let userResponse = confirm("Delete this application?")
 
 if(userResponse){
-  const updated = applicationsArr.filter(item => item.id !== id);
+   applicationsArr = applicationsArr.filter(item => item.id !== id);
   
-  saveData(updated);
+  saveData(applicationsArr);
   renderTable();
   
-  location.reload();
 }else{
   alert("Action has been cancelled.")
 }

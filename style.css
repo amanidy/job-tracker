@@ -29,13 +29,15 @@ header p {
 }
 
 
-form{
+
+.form-section {
   display: none;
 }
 
-.visible{
+.form-section.visible {
   display: block;
 }
+
 
 .add-job {
   display: block;
