@@ -1,1 +1,3 @@
-console.log("Hello dashboard")
+const apps = JSON.parse(localStorage.getItem("apps")) || [];
+
+console.log(apps);

@@ -200,6 +200,53 @@ if(userResponse){
 }
   
 }
+
+//processing applications 
+const processBtnEl = document.getElementById('process-btn');
+
+processBtnEl.addEventListener('click', function (){
+  
+  /*Don't process if there is no applications*/
+  if (applicationsArr.length === 0) {
+      alert("Add at least one item before processing.");
+      return;
+    }
+    
+    
+    let total = applicationsArr.length;
+    console.log(total);
+    
+    
+    
+    const interviewApplications = applicationsArr.filter(app => app.status === "interview");
+const offerApplications = applicationsArr.filter(app=> app.status ==="offer");
+
+
+  const response = (interviewApplications.length
+       + offerApplications.length) / total;
+    
+
+    
+
+    const responseRate = response * 100;
+    
+    
+    console.log(responseRate);
+    
+    const completedApplication = {
+      id: Date.now(),
+      items: [...applicationsArr],
+      total: total,
+      createdAt: new Date().toISOString()
+    };
+
+    const existingApplictations = JSON.parse(localStorage.getItem("apps")) || [];
+    existingApplictations.push(completedApplication);
+    localStorage.setItem("apps", JSON.stringify(existingApplictations));
+    
+    
+})
+
   
   renderTable();
   

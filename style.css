@@ -244,6 +244,31 @@ tr:hover {
   color: #111827;
 }
 
+#process-btn:active{
+  transform: scale(0.98);
+}
+
+
+
+#process-btn {
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+}
+
+#process-btn {
+  display: block;
+  width: 120px;
+  margin: 0 16px 24px 16px;
+  padding: 14px 14px;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+
    /* Mobile responsive table */
 @media (max-width: 600px) {
 
