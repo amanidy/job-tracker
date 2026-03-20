@@ -201,7 +201,7 @@ if(userResponse){
   
 }
 
-//processing applications 
+
 const processBtnEl = document.getElementById('process-btn');
 
 processBtnEl.addEventListener('click', function (){
@@ -246,6 +246,9 @@ const offerApplications = applicationsArr.filter(app=> app.status ==="offer");
     
     
 })
+
+
+
 
   
   renderTable();
