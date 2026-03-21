@@ -204,52 +204,41 @@ if(userResponse){
 
 const processBtnEl = document.getElementById('process-btn');
 
-processBtnEl.addEventListener('click', function (){
-  
-  /*Don't process if there is no applications*/
+let isProcessing = false;
+
+processBtnEl.addEventListener('click', function () {
+
+  if (isProcessing) return;
+  isProcessing = true;
+
   if (applicationsArr.length === 0) {
-      alert("Add at least one item before processing.");
-      return;
+    alert("Add at least one item before processing.");
+    isProcessing = false;
+    return;
+  }
+
+  
+  const existingApplications = JSON.parse(localStorage.getItem("apps")) || [];
+
+  
+  applicationsArr.forEach(newApp => {
+    const alreadySaved = existingApplications.some(saved => saved.id === newApp.id);
+    if (!alreadySaved) {
+      existingApplications.push(newApp);
     }
-    
-    
-    let total = applicationsArr.length;
-    console.log(total);
-    
-    
-    
-    const interviewApplications = applicationsArr.filter(app => app.status === "interview");
-const offerApplications = applicationsArr.filter(app=> app.status ==="offer");
+  });
 
+  
+  localStorage.setItem("apps", JSON.stringify(existingApplications));
 
-  const response = (interviewApplications.length
-       + offerApplications.length) / total;
-    
+  
+  applicationsArr.length = 0;
 
-    
+  
+  renderTable(existingApplications);
 
-    const responseRate = response * 100;
-    
-    
-    console.log(responseRate);
-    
-    const completedApplication = {
-      id: Date.now(),
-      items: [...applicationsArr],
-      total: total,
-      createdAt: new Date().toISOString()
-    };
-
-    const existingApplictations = JSON.parse(localStorage.getItem("apps")) || [];
-    existingApplictations.push(completedApplication);
-    localStorage.setItem("apps", JSON.stringify(existingApplictations));
-    
-    
-})
-
-
-
-
+  isProcessing = false;
+});
   
   renderTable();
   

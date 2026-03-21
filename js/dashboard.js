@@ -2,37 +2,23 @@ const apps = JSON.parse(localStorage.getItem("apps")) || [];
 
 console.log(apps);
 
-function processEl(){
-  let totalApplications = 0;
-let totalInterviews = 0;
-let totalOffers = 0;
+function processEl() {
+  const apps = JSON.parse(localStorage.getItem("apps")) || [];
 
-apps.forEach(app => {
-  totalApplications += app.total; // each completed application has a total
-
-  console.log(totalApplications);
+  const totalApplications = apps.length; 
   
-  
-  const interviews = app.items.filter(item => item.status === "interview"); // dig into each application's items array
-  totalInterviews += interviews.length;
-  console.log(totalInterviews);
-  
-  const offers = app.items.filter(item => item.status === "offer"); // dig into each application's items array
-  totalOffers += offers.length;
-  console.log(totalOffers);
-  
-  
-});
+console.log(totalApplications);
+  const totalInterviews = apps.filter(app => app.status === "interview").length;
+  const totalOffers = apps.filter(app => app.status === "offer").length;
 
-let responseRate = Math.round((totalOffers + totalInterviews) / totalApplications * 100)
+  const responseRate = totalApplications > 0
+    ? Math.round((totalOffers + totalInterviews) / totalApplications * 100)
+    : 0;
 
-
-document.getElementById("response-rate").textContent = ` ${responseRate}%`;
-document.getElementById("total-applications").textContent = totalApplications;
-document.getElementById("total-offers").textContent = totalOffers;
-
-document.getElementById("total-interviews").textContent =totalInterviews;
-
+  document.getElementById("response-rate").textContent = `${responseRate}%`;
+  document.getElementById("total-applications").textContent = totalApplications;
+  document.getElementById("total-offers").textContent = totalOffers;
+  document.getElementById("total-interviews").textContent = totalInterviews;
 }
 
 processEl();
@@ -50,28 +36,23 @@ function getLast7Days() {
 function getResponsesPerDay() {
   const responses = Array(7).fill(0);
 
-  apps.forEach(app => {
-    app.items.forEach(item => {
-      const applicationDate = new Date(item.date);
-      const today = new Date();
-      const diffDays = Math.floor((today - applicationDate) / (1000 * 60 * 60 * 24));
+  apps.forEach(item => {                                    
+    const applicationDate = new Date(item.date);
+    const today = new Date();
+    const diffDays = Math.floor((today - applicationDate) / (1000 * 60 * 60 * 24));
 
-      if (diffDays < 7) {
-        const index = 6 - diffDays;
-
-        // count responses (interview or offer)
-        if (item.status === "interview" || item.status === "offer") {
-          responses[index]++;
-        }
+    if (diffDays >= 0 && diffDays < 7) {                
+      const index = 6 - diffDays;
+      if (item.status === "interview" || item.status === "offer") {
+        responses[index]++;
       }
-    });
+    }
   });
 
   return responses;
 }
 
 const responseCtx = document.getElementById("responseChart").getContext("2d");
-
 new Chart(responseCtx, {
   type: "line",
   data: {
@@ -92,19 +73,13 @@ new Chart(responseCtx, {
   }
 });
 
+
 function getTopStatuses() {
   const statusMap = {};
 
-  apps.forEach(app => {
-    app.items.forEach(item => {
-      const status = item.status;
-
-      if (statusMap[status]) {
-        statusMap[status]++;
-      } else {
-        statusMap[status] = 1;
-      }
-    });
+  apps.forEach(item => {                              
+    const status = item.status;
+    statusMap[status] = (statusMap[status] || 0) + 1;     
   });
 
   return {
@@ -115,7 +90,6 @@ function getTopStatuses() {
 
 const topStatuses = getTopStatuses();
 const topCtx = document.getElementById("topApplicationsChart").getContext("2d");
-
 new Chart(topCtx, {
   type: "bar",
   data: {
@@ -132,12 +106,13 @@ new Chart(topCtx, {
   }
 });
 
+
 function getApplicationsByHour() {
   const hours = Array(24).fill(0);
 
-  apps.forEach(app => {
-    const hour = new Date(app.createdAt).getHours();
-    hours[hour]++;
+  apps.forEach(item => {
+    const hour = new Date(item.date).getHours();          
+    if (!isNaN(hour)) hours[hour]++;                      
   });
 
   const activeHours = hours
@@ -152,7 +127,6 @@ function getApplicationsByHour() {
 
 const hourly = getApplicationsByHour();
 const hourlyCtx = document.getElementById("hourlyChart").getContext("2d");
-
 new Chart(hourlyCtx, {
   type: "doughnut",
   data: {
@@ -164,4 +138,3 @@ new Chart(hourlyCtx, {
   },
   options: { responsive: true }
 });
-
