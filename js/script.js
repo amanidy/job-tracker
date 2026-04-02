@@ -4,6 +4,20 @@
 const formEl = document.querySelector(".form-section");
 const addBtnEl = document.querySelector('.add-job');
 
+  //filtering applications by status 
+  
+  let currentFilter = 'All';
+
+function handleFilter(status) {
+  currentFilter = status;
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  event.target.classList.add('active');
+  renderTable();
+}
 
 //functionality for form visibility
 function toggleApplicationForm(){
@@ -98,7 +112,14 @@ const formattedDate = today.getFullYear() + "-" + month + "-" + day;
       
     }
     
-    tableBody.innerHTML = applicationsArr.map(application=> `
+    const filtered = currentFilter === 'All'
+  ? applicationsArr
+  : applicationsArr.filter(a => a.status.toLowerCase() === currentFilter.toLowerCase());
+  
+    console.log('Filter:', currentFilter);
+console.log('All statuses:', applicationsArr.map(a => a.status));
+
+    tableBody.innerHTML = filtered.map(application=> `
     
    <tr>
   <td data-label="Name">${application.name}</td>
@@ -242,4 +263,7 @@ processBtnEl.addEventListener('click', function () {
   
   renderTable();
   
+  
+
+
   

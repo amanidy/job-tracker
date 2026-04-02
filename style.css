@@ -249,6 +249,21 @@ tr:hover {
 }
 
 
+.filter-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #2a2a2a;
+  color: #ccc;
+}
+
+.filter-btn.active {
+  background: #e63946;
+  color: #fff;
+}
+
+
 
 
 

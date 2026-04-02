@@ -19,6 +19,8 @@
   </header>
   
 <button class="add-job"type="button">Add Job Application</button>
+
+
   
   <section class="form-section">
     <form id="form" action="" method="get" accept-charset="utf-8">
@@ -61,6 +63,8 @@
       
       <button onclick="handleAddSubmit(event)" class="submit-btn" type="submit">Submit Application</button>
       
+     
+      
     </form>
     
   </section>
@@ -86,6 +90,17 @@
   <div>
       <buttton id="process-btn" type="submit">Process Applications</button>
     </div>
+    
+    <div class="filter-buttons">
+  <button class="filter-btn active" onclick="handleFilter('All')">All</button>
+  <button class="filter-btn" onclick="handleFilter('Applied')">Applied</button>
+  <button class="filter-btn" onclick="handleFilter('Phone')">Phone</button>
+  <button class="filter-btn" onclick="handleFilter('Interview')">Interview</button>
+  <button class="filter-btn" onclick="handleFilter('Offer')">Offer</button>
+  <button class="filter-btn" onclick="handleFilter('Rejected')">Rejected</button>
+  <button class="filter-btn" onclick="handleFilter('Ghosted')">Ghosted</button>
+  <button class="filter-btn" onclick="handleFilter('Withdrawn')">Withdrawn</button>
+</div>
   
   <script src='../js/script.js' type="text/javascript" charset="utf-8">
   </script>
