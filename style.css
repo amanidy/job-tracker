@@ -37,9 +37,22 @@ header p {
 .form-section.visible {
   display: block;
 }
+#process-btn {
+  display: block;
+  width: calc(100% - 32px);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 0 16px 24px 16px;
+}
 
-
-.add-job,#process-btn {
+.add-job{
   display: block;
   width: calc(100% - 32px);
   margin: 0 16px 24px 16px;
@@ -468,4 +481,17 @@ tr:hover {
 
 }
 
+.back-btn {
+  display: inline-block;
+  margin: 10px 16px;
+  color: #6c63ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.delete-btn{
+    width: 140px;
+    padding: 2px 32px;
+    margin-bottom: 16px;
+}
 
